@@ -1,92 +1,94 @@
-# TPP Template
+# Условия использования 
+
+Этот проект представляет собой заготовку, MVP, для задачи "ПЛК" и предназначен для получения представления о интерфейсе взаимодействия компонентов, возможных способах реализации их минимального функционала, его объеме и т.д. Таким образом, пример является отправной точкой работы, но не обязательно является образцом "хорошо" или "правильно" и может быть изменен и расширен участниками в своих реализациях.
+
+Применять только в учебных целях. Данных код может содержать ошибки, авторы не несут никакой ответственности за любые последствия использования этого кода.
+Условия использования и распространения - MIT лицензия (см. файл LICENSE).
+
+## Настройка и запуск
+
+### Системные требования
+
+Данный пример разработан и проверен на ОС Ubuntu 20.04.5, авторы предполагают, что без каких-либо изменений этот код может работать на любых Debian-подобных OS, для других Linux систем, а также для MAC OS необходимо использовать другой менеджер пакетов. В Windows необходимо самостоятельно установить необходимое ПО или воспользоваться виртуальной машиной с Ubuntu (также можно использовать WSL версии не ниже 2).
+
+### Используемое ПО
+
+Стандартный способ запуска демо предполагает наличие установленного пакета *docker*, а также *docker-compose*. Для автоматизации типовых операций используется утилита *make*, хотя можно обойтись и без неё, вручную выполняя соответствующие команды из файла Makefile в командной строке.
+
+Другое используемое ПО (в Ubuntu будет установлено автоматически, см. следующий раздел):
+- python (желательно версия не ниже 3.8)
+- pipenv (для виртуальных окружений python)
+
+Для работы с кодом примера рекомендуется использовать VS Code или PyCharm.
+
+В случае использования VS Code следует установить расширения
+- REST client
+- Docker
+- Python
+
+### Настройка окружения и запуск примера
+
+Подразумевается наличие развернутой по предоставленному образцу машины с установленным и настроенным ПО, например, docker и docker-compose, с выбранным интерпретатором.
+
+Для запуска примера рекомендуется использовать следующую комбинацию команд в терминалах 1 и 2:
+
+1.1 docker-compose build --force-rm
+
+1.2 make run (В устройстве начнут генерироваться и поступать сигналы от эмуляторов датчиков)
+
+2.1 docker-compose logs -f --tail 100 (будет показан лог работы контейнеров)
+
+1.3 make test (Будет запущен тестовый сценарий проверки работы основного функционала системы)
+
+__Можно пользоваться запросами из request.rest__
+
+1.4 docker stop $(docker ps -q) (завершение работы, альтернативно можно воспользоваться командами "turn_off" к "датчикам" через запросы в request.rest)
 
 
+### Описание системы
 
-## Getting started
+Система архитектруно выглядит следующим образом:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+![Система](./docs/images/plc.png)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+//www.plantuml.com/plantuml/png/SoWkIImgAStDuV8lI2rABCalKh3HrRLJY0vsTdHnZ5MmKiWeAIdGKRYmwyA-2tikRBYmzyAMYzqw2Z5v5xQ0UNilTb_OoXKTuECSgs23q6Y5HGUGl_72NY2vwSBk2rk1h1qN-tKKi9fJMW0oAYSpEJMlE3M-EBMeBBK8PEPke9usiDxj8DrmzIdvvNaW7SL0zVb5nHZMerdZa9gN0lGp0000
 
-## Add your files
+### Компоненты
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+| Название | Назначение | Комментарий |
+|----|----|----|
+|*scada* | Эмулятор системы контроля и управления станции. Здесь - входная точка системы, которая принимает команды и запросы от оператора, позволяет авторизоваться и выдает подписанным пользователям данные, полученные от ПЛК. | - |
+|*license_server* | Эмулятор сервиса, который проверяет возможность выполнения запрошенного действия (здесь - обновления) для заданного устройства и оператора. | - |
+|*plc* | Непосредственно ПЛК, получает команды от операторов, выполняет их, обновляется по команде, принимает данные от датчиков (sensors), обрабатывает и передает их на СКАДУ. | - |
+|*sensors*  | Эмулятор датчиков, здесь их 3 - датчик температуры, мощности и количества оборотов турбины. Получают команды (старт/стоп/изменить пределы генерации), генерируют непосредственно данные раз в заданный промежуток времени и отдают их на ПЛК через HTTP. | Пределы генерации можно изменить через команды. (Команда -> scada -> plc -> sensors). Пример есть в тесте. |
+|*storage* | Фактически это лишь папка с данными. Здесь она для простоты используется и scada и plc, хотя очевидно, что это разная память. Для подчеркивания разницы используются постфиксы _plc и _scada в названии файла. Файл version подразумевает "обновление", settings - настройки системы, используемые для сравнения в plc входных данных. Здесь же файл users - список ролей в системе и связанных с ними логинов и паролей. | Роли: Наблюдатель - может получать только данные. Оператор - может получать данные и менять настройки. Инженер - может обновлять ПО. |
 
-```
-cd existing_repo
-git remote add origin https://git.codenrock.com/cyberimmune/tpp-template.git
-git branch -M main
-git push -uf origin main
-```
+Диаграмма последовательности выглядит следующим образом:
 
-## Integrate with your tools
+![Диаграмма последовательности](./docs/images/plc_sd.png)
 
-- [ ] [Set up project integrations](https://git.codenrock.com/cyberimmune/tpp-template/-/settings/integrations)
+[Cсылка на диаграмму для редактирования](//www.plantuml.com/plantuml/png/jPFFIiD04CRl-nJhkSqB5D6MceDGh3JWIIXB6YGGio59xzg282q8uacnYa-GYg6rVz9Nc7qZPxTDx1OHB-RGJURxpUmtkzDg5BCmxbvwX30xvY5TFyt02PdyP17b9434jTs0-J6rwhMZcWn7DkimJJfjrAKGU3RHKymJgzcoL9BZHpoCDBbnN4V0R5jcwyniISfpRUGSGZpE0xB9APK8LgRx1Yq25GflaC82Lf2AAqX4J_JbMgOOoyGjBF7t6gF3yhaF6OmXGpd3m43LCWxMNQXA3v0WlnG3IFCj3OCuVeSGNf0Lwl6BjkiJzIN3N4zLbhK46C5O6e5tc4EARrD8AIw9SePsC3ZxheU-CETvI_w46KnplxZyN59h295N52QY3tCn53rvDBALlxfxWP7kwBSjy-jIf_W4Kt6ZW0c-tHsIZLWKsYNsSi8m_gt7HoopK7Vq0OdUc2OMOw6Dc9wD03hTw5ieWlSu02k4vuZcZlL9sXqates9VAeeud_m2m00)
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Примечания
 
-## Test and Deploy
+В данном примере не используется брокер сообщений, взаимодействие между системами построено на базе REST запросов, однако в решении _внутренние_ компоненты проектируемого устройства должны взаимодействовать через брокер сообщений (желательно Apache Kafka), _внешнее_ взаимодействие следует по-прежнему через REST. 
 
-Use the built-in continuous integration in GitLab.
+Пример такой реализации можно найти в репозитории https://github.com/sergey-sobolev/secure-update, подробное описание запуска примера есть на степике (https://stepik.org/course/133991/)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Хотя код этого примера написан на Python, команды могут по желанию своё решение сделать на других языках (C/C++, C#, Golang, Javascript/Typescript, Java, Rust, PHP), основные требования:
+1. использование брокера сообщений (предпочтительно Apache Kafka, но можно RabbitMQ, Mosquitto)
+2. наличие хотя бы одного функционального теста
+3. наличие тестов безопасности (предпочтительно автоматизированных, в крайнем случае - описание ручных тестов безопасности)
+4. наличие монитора безопасности, который должен контролировать все взаимодействия между доменами безопасности
+5. наличие политик безопасности, которые использует монитор безопасности. Политики безопасности должны обеспечивать реализацию предложенной политики архитектуры.
 
-***
+## Дополнительные материалы по кибериммунной разработке
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Видео на youtube (записи занятий)
+  - Теория https://youtu.be/hTDBLP1Jlc0 
+  - Разбор домашнего задания на проектирование; ключевые принципы и технологии работы кибериммунных систем https://youtu.be/eYr-toUUQDA
+  - Пошаговый разбор трансформации примера в новую систему https://youtu.be/BH2HrPltr7M
+  - Тестирование, в т.ч. тесты безопасности https://youtu.be/BEVZVm6xi-M 
+- Github wiki по теме со ссылками на примеры и решения на Python и Java https://github.com/sergey-sobolev/cyberimmune-systems/wiki/%D0%9A%D0%B8%D0%B1%D0%B5%D1%80%D0%B8%D0%BC%D0%BC%D1%83%D0%BD%D0%B8%D1%82%D0%B5%D1%82
+- Заготовка описания решения команды https://github.com/sergey-sobolev/secure-update/blob/main/docs/report/report.md

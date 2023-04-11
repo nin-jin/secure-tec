@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  sensors:
+    image: sensors
+    build:
+      context: .
+      dockerfile: ./Dockerfile.sensors
+    ports:
+      - "6068:6068"
+
+  scada:
+    image: scada
+    build:
+      context: .
+      dockerfile: ./Dockerfile.scada
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    volumes:
+      - ./storage/:/storage
+    ports:
+      - "6069:6069"   
+
+  plc:
+    image: plc
+    build:
+      context: .
+      dockerfile: ./Dockerfile.plc
+    volumes:
+      - ./storage/:/storage
+    ports:
+      - "6064:6064"
+  
+  license_server:
+    image: license_server
+    build:
+      context: .
+      dockerfile: ./Dockerfile.license_server
+    ports:
+      - "6067:6067"
