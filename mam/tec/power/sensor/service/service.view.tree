@@ -4,6 +4,6 @@ $tec_power_sensor_service $tec_controller_service
 		value? => value?
 	body /
 		<= Value $mol_card
-			title <= value
+			content/ <= value
 	auto /
 		<= receive null
