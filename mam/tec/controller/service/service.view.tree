@@ -11,5 +11,5 @@ $tec_controller_service $mol_page
 	tools /
 		<= Active $mol_check_icon
 			checked? <=> active?
-			Icon <= Active_icon $mol_icon_checkbox_blank_circle
+			Icon <= Active_icon $mol_icon_power
 	body /
