@@ -1,0 +1,15 @@
+$tec_controller_service $mol_page
+	yard $hyoo_sync_yard
+		peer <= Peer null
+	Model $tec_controller
+		active? => active?
+	title_content /
+		<= Avatar $mol_avatar id <= id \
+		<= title
+		\ 
+		<= id
+	tools /
+		<= Active $mol_check_icon
+			checked? <=> active?
+			Icon <= Active_icon $mol_icon_checkbox_blank_circle
+	body /

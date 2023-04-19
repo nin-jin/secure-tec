@@ -1,0 +1,9 @@
+$tec_power_sensor_service $tec_controller_service
+	title \Power Sensor
+	Model $tec_power_sensor
+		value? => value?
+	body /
+		<= Value $mol_card
+			title <= value
+	auto /
+		<= receive null
