@@ -8,6 +8,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		receive() {
+			if( !this.active() ) return
 			$mol_wire_watch()
 			this.value( 100 + Math.random() )
 		}
