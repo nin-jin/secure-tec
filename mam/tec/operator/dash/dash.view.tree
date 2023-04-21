@@ -1,0 +1,14 @@
+$tec_operator_dash $mol_page
+	yard $hyoo_sync_client
+		peer <= Peer null
+	domain $tec_domain
+	title_content /
+		<= Avatar $mol_avatar id <= id \
+		<= title \Operator
+		\ 
+		<= id
+	body /
+		<= Controllers $mol_list rows <= controllers /
+			<= Controller*0_0 $tec_controller_row
+				Model <= controller_model* $tec_controller
+				title <= controller_title* \

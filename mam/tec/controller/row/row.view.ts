@@ -9,6 +9,14 @@ namespace $.$$ {
 			return this.Intent().land.allowed_mod()
 		}
 		
+		// @ $mol_mem
+		// sub() {
+		// 	return this.intentable() ? super.sub() : [
+		// 		this.Title(),
+		// 		this.Value_current(),
+		// 	]
+		// }
+		
 		@ $mol_mem
 		value_changed( next = this.value_intent() ) {
 			return next
