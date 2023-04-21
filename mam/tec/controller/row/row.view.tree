@@ -1,0 +1,24 @@
+$tec_controller_row $mol_view
+	Model $tec_controller
+		active => active_current
+		value => value_current
+	Intent $tec_controller_intent
+		active? => active_intent?
+		value? => value_intent?
+	intentable false
+	sub /
+		<= Title $mol_view sub / <= title \
+		<= Value_current $mol_view sub / <= value_current_pretty \
+		<= Active_current $mol_view sub / <= active_current_pretty
+		<= Active_intent $mol_check_icon
+			checked? <=> active_intent?
+			enabled <= intentable
+			Icon <= Active_intent_icon $mol_icon_power
+		<= Value_intent $mol_number
+			value? <=> value_changed? <= value_intent
+			enabled <= intentable
+			submit? <=> value_submit? null
+		<= Value_submit $mol_button_minor
+			click? <=> value_submit? null
+			enabled <= intentable
+			sub / <= Value_submit_icon $mol_icon_check

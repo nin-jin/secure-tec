@@ -1,0 +1,21 @@
+$tec_domain_admin $mol_book2_catalog
+	yard $hyoo_sync_client
+		peer <= Peer null
+	domain $tec_domain
+		persons => persons
+		controllers => controllers
+	menu_title \Security
+	menu_tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
+	spreads *
+		persons <= Persons $tec_domain_admin_dict
+			node <= persons
+			tools / <= Spread_close
+		controllers <= Controllers $tec_domain_admin_dict
+			node <= controllers
+			tools / <= Spread_close
+		rules <= Rules $mol_page
+		dashboard <= Dashboard $tec_domain_dash
+			domain <= domain
+			tools / <= Spread_close

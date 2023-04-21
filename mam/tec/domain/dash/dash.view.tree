@@ -1,0 +1,7 @@
+$tec_domain_dash $mol_page
+	domain $tec_domain
+	body /
+		<= Controllers $mol_list rows <= controllers /
+			<= Controller*0_0 $tec_controller_row
+				Model <= controller_model* $tec_controller
+				title <= controller_title* \

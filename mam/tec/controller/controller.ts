@@ -13,5 +13,14 @@ namespace $ {
 			return this.sub( 'update_status', $hyoo_crowd_reg ).str( next )
 		}
 		
+		value( next?: number ) {
+			return this.sub( 'value', $hyoo_crowd_reg ).numb( next )
+		}
+		
+		@ $mol_mem
+		intent() {
+			return this.yoke( 'intent', $tec_controller_intent, [ $tec_domain.id ] )
+		}
+		
 	}
 }

@@ -13,13 +13,17 @@ namespace $.$$ {
 			return peer
 		}
 		
+		id() {
+			return this.Peer().id
+		}
+		
 		@ $mol_mem
 		Model() {
 			return this.yard().world().Fund( $tec_controller ).Item( this.Peer().id )
 		}
 		
-		id() {
-			return this.Peer().id
+		intent_active() {
+			this.Model().active( this.Model().intent()?.active() ?? false )
 		}
 		
 	}

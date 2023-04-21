@@ -1,0 +1,22 @@
+$tec_domain_admin_dict $mol_page
+	node $hyoo_crowd_dict
+	body /
+		<= List $mol_list rows <= rows /
+			<= Item*0_0 $mol_row sub /
+				<= Item_id* $mol_string
+					value <= item_id* \
+					enabled false
+				<= Item_title* $mol_string value? <=> item_title*? \
+				<= Item_drop* $mol_button_minor
+					click? <=> item_drop*? null
+					sub / <= Item_drop_icon* $mol_icon_cross
+			<= Add $mol_row sub /
+				<= Add_id $mol_string
+					hint \id
+					value? <=> add_id? \
+				<= Add_title $mol_string
+					hint \title
+					value? <=> add_title? \
+				<= Add_submit $mol_button_minor
+					click? <=> add_submit? null
+					sub / <= Add_submit_icon $mol_icon_plus
