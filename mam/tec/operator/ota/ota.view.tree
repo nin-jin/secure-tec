@@ -1,0 +1,7 @@
+$tec_operator_ota $tec_controller_service
+	title \OTA
+	body /
+		<= syncer $hyoo_sync_online
+			yard <= yard
+		<= bundle $mol_attach
+			attach_new?val <=> upload?val null
