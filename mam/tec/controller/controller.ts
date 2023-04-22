@@ -22,5 +22,10 @@ namespace $ {
 			return this.yoke( 'intent', $tec_controller_intent, [ $tec_domain.id ] )
 		}
 		
+		@ $mol_mem
+		change_moment() {
+			return new $mol_time_moment( this.land.last_stamp() )
+		}
+		
 	}
 }

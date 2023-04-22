@@ -7,6 +7,9 @@ $tec_operator_dash $mol_page
 		<= title \Operator
 		\ 
 		<= id
+	tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
 	body /
 		<= Controllers $mol_list rows <= controllers /
 			<= Controller*0_0 $tec_controller_row

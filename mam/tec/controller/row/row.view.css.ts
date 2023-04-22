@@ -3,6 +3,9 @@ namespace $.$$ {
 		
 		Title: {
 			padding: $mol_gap.text,
+			flex: {
+				basis: `10rem`,
+			},
 		},
 		
 		Active_current: {
@@ -10,6 +13,14 @@ namespace $.$$ {
 		},
 		
 		Value_current: {
+			padding: $mol_gap.text,
+			flex: {
+				basis: `6rem`,
+			},
+			justifyContent: 'flex-end',
+		},
+		
+		Value_time: {
 			padding: $mol_gap.text,
 		},
 		

@@ -4,7 +4,7 @@ $tec_domain_admin $mol_book2_catalog
 	domain $tec_domain
 		persons => persons
 		controllers => controllers
-	menu_title \Security
+	menu_title \Secure Heat Station
 	menu_tools /
 		<= Online $hyoo_sync_online
 			yard <= yard
