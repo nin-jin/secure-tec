@@ -9,6 +9,7 @@ $tec_controller_row $mol_view
 	sub /
 		<= Title $mol_view sub / <= title \
 		<= Value_current $mol_view sub / <= value_current_pretty \
+		<= Value_time $mol_view sub / <= value_time \
 		<= Active_current $mol_view sub / <= active_current_pretty \
 		<= Active_intent $mol_check_icon
 			checked? <=> active_intent?

@@ -1,5 +1,5 @@
 namespace $.$$ {
-	$mol_style_define( $tec_domain_admin_rights, {
+	$mol_style_define( $tec_operator_dash, {
 		
 		flex: {
 			basis: `40rem`,
