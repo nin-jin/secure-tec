@@ -1,10 +1,12 @@
 namespace $.$$ {
-	export class $tec_operator_ota_applyer extends $.$tec_operator_ota_applyer {
+	export class $tec_operator_upload extends $.$tec_operator_upload {
 
 		@$mol_action
 		upload(files: File[]) {
 			const bundle = $mol_wire_sync(this).readFileAsBuffer(files[0]) as ArrayBuffer
-			const rights = new Uint8Array(bundle)
+			const rights = new Uint8Array(
+				bundle
+			)
 			this.yard().world().apply(rights)
 		}
 

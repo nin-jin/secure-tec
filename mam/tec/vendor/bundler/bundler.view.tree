@@ -1,0 +1,5 @@
+$tec_vendor_bundler $mol_page
+	title \OTA Bundler
+	body /
+		<= bundle $mol_attach
+			attach_new?val <=> upload?val null

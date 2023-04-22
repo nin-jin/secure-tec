@@ -1,8 +1,8 @@
-$tec_operator_ota_applyer $tec_controller_service
+$tec_operator_upload $tec_controller_service
 	yard $hyoo_sync_client
 		peer <= Peer null
 	domain $tec_domain
-	title \OTA Applyer
+	title \OTA Uploader
 	body /
 		<= syncer $hyoo_sync_online
 			yard <= yard
