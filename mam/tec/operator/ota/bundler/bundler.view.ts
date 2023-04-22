@@ -12,28 +12,20 @@ namespace $.$$ {
 				)
 			}
 
-			const blob = new $mol_blob( [$mol_wire_sync(land.world()!).delta_batch(land)] )
-			
+			const blob = new $mol_blob([$mol_wire_sync(land.world()!).delta_batch(land)])
+			const path_name = `${land!.id()}!${dict.head}.bin`
+
 			const link = document.createElement('a')
 			link.setAttribute('href', URL.createObjectURL(blob))
-			link.setAttribute('download', this.download_name(land, dict.head))
+			link.setAttribute('download', path_name)
 			link.style.display = 'none'
 			document.body.appendChild(link)
 			link.click()
 			document.body.removeChild(link)
 		}
 
-		async readFileAsBuffer(file: File) {
-			let result_buffer = await new Promise((resolve) => {
-				let fileReader = new FileReader();
-				fileReader.onload = (e) => resolve(fileReader.result);
-				fileReader.readAsArrayBuffer(file);
-			});
-			return result_buffer;
-		}
-		
-		download_name( land : $hyoo_crowd_land, head: $mol_int62_string ) {
-			return `${ land!.id() }!${ head }.bin`
+		download_name(land: $hyoo_crowd_land, head: $mol_int62_string) {
+			return `${land!.id()}!${head}.bin`
 		}
 
 	}
