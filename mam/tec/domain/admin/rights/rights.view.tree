@@ -2,10 +2,10 @@ $tec_domain_admin_rights $mol_page
 	domain $tec_domain
 	body /
 		<= List $mol_list rows <= rows /
-			<= Item*0_0 $mol_row sub /
+			<= Item*0_0 $mol_view sub /
 				<= Item_person* $mol_view sub / <= item_person* \
 				<= Item_controller* $mol_view sub / <= item_controller* \
-			<= Add $mol_row sub /
+			<= Add $mol_view sub /
 				<= Add_person $mol_select
 					hint \Person
 					value? <=> add_person? \

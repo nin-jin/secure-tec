@@ -48,23 +48,25 @@ namespace $.$$ {
 		@ $mol_mem
 		persons() {
 			const dict = this.domain().persons()
-			return Object.fromEntries(
-				dict.keys().map( id => [
+			return Object.fromEntries([
+				[ '', '[Person]' ],
+				... dict.keys().map( id => [
 					id,
 					dict.sub( id, $hyoo_crowd_reg ).str(),
 				] )
-			)
+			])
 		}
 		
 		@ $mol_mem
 		controllers() {
 			const dict = this.domain().controllers()
-			return Object.fromEntries(
-				dict.keys().map( id => [
+			return Object.fromEntries([
+				[ '', '[Controller]' ],
+				... dict.keys().map( id => [
 					id,
 					dict.sub( id, $hyoo_crowd_reg ).str(),
 				] )
-			)
+			])
 		}
 		
 		@ $mol_action
