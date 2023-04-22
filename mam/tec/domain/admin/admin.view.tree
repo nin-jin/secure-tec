@@ -22,7 +22,11 @@ $tec_domain_admin $mol_book2_catalog
 			domain <= domain
 			Peer <= Peer
 			tools / <= Spread_close
-		ota <= OTA $tec_operator_ota
+		ota_bundler <= OTA_bundler $tec_operator_ota_bundler
+			domain <= domain
+			Peer <= Peer
+			tools / <= Spread_close
+		ota_applyer <= OTA_applyer $tec_operator_ota_applyer
 			domain <= domain
 			Peer <= Peer
 			tools / <= Spread_close

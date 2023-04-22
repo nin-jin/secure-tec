@@ -38,9 +38,6 @@ namespace $.$$ {
 					if( data instanceof Array ) return
 					if( data instanceof ArrayBuffer ) return
 
-					// console.log({line, data: data.toString()})
-					// $node.fs.writeFileSync("update.js", data);
-
 					await this.line_receive( line, data )
 					
 				} )
