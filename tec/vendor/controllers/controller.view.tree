@@ -1,5 +1,9 @@
 $tec_vendor_controllers $mol_switch
 	value?val <=> controller?val \none
 	options <= controllers *
-		power \power
-		sensor \sensor
+		power_sensor \Power Sensor
+		power_driver \Power Driver
+		temp_sensor \Temperature Sensor
+		freq_sensor \Frequency Sensor
+		sync_server \Sync Server
+		persister \Persister
