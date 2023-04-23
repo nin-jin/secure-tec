@@ -7,7 +7,7 @@ namespace $.$$ {
 			const dict = this.vendor()
 
 			this.vendor().expires(
-				this.Controllers().value()
+				this.domain().value()
 			).str(
 				this.Date().value()
 			)

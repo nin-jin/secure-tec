@@ -3,9 +3,9 @@ $tec_vendor_license $mol_page
 	title \License server
 	body / <= content $mol_list
 		rows /
-			<= Controllers_card $mol_card
-				title \1. Select controllers for update license:
-				status <= Controllers $tec_vendor_controllers
+			<= Domain_card $mol_card
+				title \1. Select domain for update license:
+				status <= domain $mol_string
 			<= Date_card $mol_card
 				title \2. Select new expiration time:
 				status <= Date $mol_date
