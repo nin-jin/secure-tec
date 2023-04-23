@@ -13,7 +13,7 @@ namespace $.$$ {
 			const dict = this.vendor()
 
 			this.vendor().expires(
-				this.domain().value()
+				this.domain_id()
 			).numb(
 				this.Date().value_moment().native.getTime()
 			)
