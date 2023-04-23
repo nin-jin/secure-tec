@@ -4,9 +4,9 @@ namespace $.$$ {
 		@$mol_mem
 		update() {
 			const land = this.world().land( $tec_vendor.id )
-			const dict = land.node( "0_0", $hyoo_crowd_dict )
+			const dict = land.node( "0_0", $tec_vendor )
 
-			const path = $node.path.join( __dirname, 'ota' )
+			const path = $node.path.join( __dirname, 'updates' )
 			$node.fs.mkdirSync( path, { recursive: true } )
 
 			for( const filename of dict.keys() as $mol_int62_string[] ) {

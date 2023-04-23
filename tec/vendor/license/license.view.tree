@@ -1,0 +1,15 @@
+$tec_vendor_license $mol_page
+	vendor $tec_vendor
+	title \License server
+	body / <= content $mol_list
+		rows /
+			<= Controllers_card $mol_card
+				title \1. Select controllers for update license:
+				status <= Controllers $tec_vendor_controllers
+			<= Date_card $mol_card
+				title \2. Select new expiration time:
+				status <= Date $mol_date
+					value_moment?val <=> date?val $mol_time_moment
+			<= Flusher $mol_button_minor
+				title \3. Bundle license
+				click <= bundle_license null

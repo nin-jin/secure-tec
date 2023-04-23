@@ -1,8 +1,12 @@
-$tec_vendor_manager $mol_page
+$tec_vendor_manager $mol_book2_catalog
+	menu_title \Vendor Station
 	yard $hyoo_sync_client
 		peer <= Peer null
-	domain $tec_vendor
-	title \Update packer
-	body /
-		<= Bundler $tec_vendor_bundler
-			domain <= domain
+	vendor $tec_vendor
+	spreads *
+		bundler <= Bundler $tec_vendor_bundler
+			vendor <= vendor
+			tools / <= Spread_close
+		license <= License $tec_vendor_license
+			vendor <= vendor
+			tools / <= Spread_close

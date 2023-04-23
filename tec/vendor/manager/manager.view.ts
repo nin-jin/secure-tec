@@ -6,7 +6,7 @@ namespace $.$$ {
 		}
 
 		@$mol_mem
-		domain() {
+		vendor() {
 			return this.yard().world().Fund( $tec_vendor ).Item( this.Peer().id )
 		}
 
