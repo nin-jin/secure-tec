@@ -13,9 +13,9 @@ namespace $.$$ {
 			const dict = this.vendor()
 
 			this.vendor().expires(
-				this.Domain().value()
-			).str(
-				this.Date().value()
+				this.domain_id()
+			).numb(
+				this.Date().value_moment().native.getTime()
 			)
 
 			$tec_vendor_bundler.pack(land, dict)

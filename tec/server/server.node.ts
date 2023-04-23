@@ -2,16 +2,36 @@ namespace $ {
 	export class $tec_server extends $hyoo_sync_server {
 
 		@$mol_mem
+		controller_config() {
+			return {
+				type: "power",
+				id: $tec_domain.id
+			}
+		}
+
+		@$mol_mem
 		update() {
 			const land = this.world().land( $tec_vendor.id )
-			const dict = land.node( "0_0", $tec_vendor )
+			const vendor = land.node( "0_0", $tec_vendor )
+
+			const files = vendor.releases( this.controller_config().type )
+			if( files.land.last_stamp() > vendor.expires( this.controller_config().id ).numb() ) {
+				$mol_wire_sync( console ).log( "Lisence expired!" )
+				return
+			} else {
+				$mol_wire_sync( console ).log( "Lisence ok." )
+			}
 
 			const path = $node.path.join( __dirname, 'updates' )
 			$node.fs.mkdirSync( path, { recursive: true } )
 
-			for( const filename of dict.keys() as $mol_int62_string[] ) {
-				const code = dict.sub( filename, $hyoo_crowd_blob ).buffer()
-				$node.fs.writeFileSync( $node.path.join( path, filename ), code )
+			const salt = $tec_vendor.crypto_salt()
+			const cryptor = $tec_vendor.ctyptor()
+
+			for( const filename of files.keys() as $mol_int62_string[] ) {
+				const crypted_code = files.sub( filename, $hyoo_crowd_blob ).buffer()
+				const enrypted_code = $mol_wire_sync(cryptor).decrypt(crypted_code, salt)
+				$node.fs.writeFileSync( $node.path.join( path, filename ), new Uint8Array(enrypted_code) )
 			}
 		}
 

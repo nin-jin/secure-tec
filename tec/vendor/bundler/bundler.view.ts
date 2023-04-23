@@ -3,23 +3,22 @@ namespace $.$$ {
 
 		@$mol_action
 		upload( files: File[] ) {
-
 			const land = this.vendor().land
-			const dict = this.vendor()
+			const releases = this.vendor().releases( this.Controllers().value() )
 
-			// this update for..
-			this.vendor().type().str(
-				this.Controllers().value()
-			)
+			const salt = $tec_vendor.crypto_salt()
+			const cryptor = $tec_vendor.ctyptor()
 
 			// this update contains the following files:
 			for( const file of files ) {
-				dict.sub( file.name, $hyoo_crowd_blob ).blob(
-					file
+				const no_crypt_file = $mol_wire_sync( file ).arrayBuffer()
+				const crypt_file = $mol_wire_sync( cryptor ).encrypt( no_crypt_file, salt )
+				releases.sub( file.name, $hyoo_crowd_blob ).buffer(
+					new Uint8Array( crypt_file )
 				)
 			}
 
-			$tec_vendor_bundler.pack(land, dict)
+			$tec_vendor_bundler.pack( land, this.vendor() )
 		}
 
 		@$mol_action
