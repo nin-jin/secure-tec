@@ -1,4 +1,5 @@
 $tec_vendor_bundler $mol_page
+	domain $tec_vendor
 	title \OTA Bundler
 	body /
 		<= bundle $mol_attach
