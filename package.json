@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@types/node": "*",
-    "mam": "*",
-    "undici": "^5.22.0"
+    "mam": "*"
   }
 }
