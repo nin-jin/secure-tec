@@ -1,4 +1,4 @@
-$tec_operator_upload $tec_controller_service
+$tec_operator_upload $mol_page
 	yard $hyoo_sync_client
 		peer <= Peer null
 	domain $tec_domain

@@ -1,6 +1,7 @@
-namespace $.$$ {
-	export class $tec_power_service extends $.$tec_power_service {
-		
+namespace $ {
+	// power sensor + power driver
+	export class $tec_power_service extends $tec_controller_service {
+
 		@ $mol_mem
 		receive( reset?: null ) {
 			
@@ -16,6 +17,12 @@ namespace $.$$ {
 			model.value( next )
 			
 		}
-		
+
+		auto() {
+			super.auto()
+			this.receive()
+		}
+
 	}
+
 }

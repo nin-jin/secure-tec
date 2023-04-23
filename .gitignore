@@ -5,5 +5,4 @@ node_modules
 *.lock
 /package.json
 /node
-/hyoo
 /mol

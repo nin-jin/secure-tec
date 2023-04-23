@@ -4,7 +4,6 @@ namespace $ {
 		@$mol_mem
 		controller_type(){
 			return "power_sensor"
-
 		}
 
 		@$mol_mem
@@ -51,8 +50,12 @@ namespace $ {
 			}
 		}
 
+		auto() {
+			// this.update()
+		}
+
 		@$mol_mem_key
-		static port( port: number ) {
+		static server( port: number ) {
 			const server = new this
 			server.port = $mol_const( port )
 			return server
@@ -64,9 +67,9 @@ namespace $ {
 			if( !port ) return
 
 			try {
-				this.port( port ).db()
-				this.port( port ).sync()
-				this.port( port ).update()
+				this.server( port ).db()
+				this.server( port ).sync()
+				this.server( port ).auto()
 			} catch( error ) {
 				$mol_fail_log( error )
 			}

@@ -1,5 +1,0 @@
-$tec_power_service $tec_controller_service
-	title \Power Service
-	auto /
-		^
-		<= receive null
