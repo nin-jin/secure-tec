@@ -4,7 +4,6 @@ namespace $ {
 		@$mol_mem
 		controller_type(){
 			return "power_sensor"
-
 		}
 
 		@$mol_mem
@@ -47,6 +46,7 @@ namespace $ {
 
 			const exutable_path = $node.path.join( path, "node.js" )
 			if( $node.fs.existsSync(exutable_path) ) {
+				$mol_wire_sync( console ).log( "Exit process, system can restart server." )
 				process.exit()
 			}
 		}

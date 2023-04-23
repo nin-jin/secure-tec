@@ -1,10 +1,7 @@
 $tec_operator_upload $tec_controller_service
 	yard $hyoo_sync_client
-		peer <= Peer null
 	domain $tec_domain
-	title \OTA Uploader
+	title \Update installer
 	body /
-		<= syncer $hyoo_sync_online
-			yard <= yard
 		<= bundle $mol_attach
 			attach_new?val <=> upload?val null
