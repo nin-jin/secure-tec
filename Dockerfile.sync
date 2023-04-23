@@ -1,0 +1,14 @@
+FROM node:18.16.0-alpine
+
+#Install some dependencies
+RUN apk add --update git
+WORKDIR /usr/app
+COPY ./ /usr/app
+RUN npm install
+
+# Build sync server
+RUN npm start tec/server
+
+#CMD npm start tec/server ;\
+#	node ./tec/server/-/node.js sync=9090
+CMD node ./tec/server/-/node.js sync=9090
