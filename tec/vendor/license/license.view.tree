@@ -1,16 +1,16 @@
 $tec_vendor_license $mol_page
 	vendor $tec_vendor
-	title \License server
+	title \Licenses
 	body / <= content $mol_list
 		rows /
-			<= Domain_card $mol_card
-				title \1. Select domain for update license:
-				status <= domain $mol_string
+			<= Domain_card $mol_labeler
+				title \Domain ID
+				Content <= Domain $mol_string
 					value?val <=> domain_id?val null
-			<= Date_card $mol_card
-				title \2. Select new expiration time:
-				status <= Date $mol_date
+			<= Date_card $mol_labeler
+				title \Exires
+				Content <= Date $mol_date
 					value_moment?val <=> date?val $mol_time_moment
 			<= Flusher $mol_button_minor
-				title \3. Bundle license
+				title \Download license package
 				click <= bundle_license null
