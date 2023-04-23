@@ -6,6 +6,7 @@ $tec_vendor_license $mol_page
 			<= Domain_card $mol_card
 				title \1. Select domain for update license:
 				status <= domain $mol_string
+					value?val <=> domain_id?val null
 			<= Date_card $mol_card
 				title \2. Select new expiration time:
 				status <= Date $mol_date
