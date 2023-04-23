@@ -1,5 +1,5 @@
 $tec_vendor_manager $mol_book2_catalog
-	menu_title \Vendor Station
+	menu_title \Vendor Manager
 	yard $hyoo_sync_client
 		peer <= Peer null
 	vendor $tec_vendor

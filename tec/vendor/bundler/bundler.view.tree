@@ -1,11 +1,11 @@
 $tec_vendor_bundler $mol_page
 	vendor $tec_vendor
-	title \Update packer
+	title \Software
 	body /
-		<= Controllers_card $mol_card
-			title \1. Select controllers for update:
-			status <= Controllers $tec_vendor_controllers
-		<= Bundler_card $mol_card
-			title \2. Pack update to path file:
-			status <= bundle $mol_attach
+		<= Controllers_card $mol_labeler
+			title \Controller
+			Content <= Controllers $tec_vendor_controllers
+		<= Bundler_card $mol_labeler
+			title \Files
+			Content <= Bundle $mol_attach
 				attach_new? <=> upload? null
