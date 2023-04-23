@@ -1,4 +1,4 @@
-namespace $.$$ {
+namespace $ {
 	export class $tec_server extends $hyoo_sync_server {
 
 		@$mol_mem
@@ -22,8 +22,11 @@ namespace $.$$ {
 			return server
 		}
 
-		@$mol_mem_key
-		static run( port: number ) {
+		@$mol_mem
+		static start() {
+			const port = Number( $mol_state_arg.value( 'sync' ) || process.env.PORT )
+			if( !port ) return
+
 			try {
 				this.port( port ).db()
 				this.port( port ).sync()
@@ -35,6 +38,4 @@ namespace $.$$ {
 
 	}
 
-	let port = Number( $mol_state_arg.value( 'sync' ) || process.env.PORT )
-	if( port ) $tec_server.run( port )
 }
