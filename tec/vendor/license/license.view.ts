@@ -14,8 +14,8 @@ namespace $.$$ {
 
 			this.vendor().expires(
 				this.domain().value()
-			).str(
-				this.Date().value()
+			).numb(
+				this.Date().value_moment().native.getTime()
 			)
 
 			$tec_vendor_bundler.pack(land, dict)
