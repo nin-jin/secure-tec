@@ -1,4 +1,9 @@
-Pipfile*
-.pytest_cache
-*.pyc
+-*
+node_modules
 .idea
+.DS_Store
+*.lock
+/package.json
+/node
+/hyoo
+/mol
