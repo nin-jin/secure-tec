@@ -1,4 +1,12 @@
-$tec_vendor_manager $mol_view
-	title \OTA Bundler
-	sub /
-		<= Bundler $tec_vendor_bundler
+$tec_vendor_manager $mol_book2_catalog
+	menu_title \Vendor Station
+	yard $hyoo_sync_client
+		peer <= Peer null
+	vendor $tec_vendor
+	spreads *
+		bundler <= Bundler $tec_vendor_bundler
+			vendor <= vendor
+			tools / <= Spread_close
+		license <= License $tec_vendor_license
+			vendor <= vendor
+			tools / <= Spread_close

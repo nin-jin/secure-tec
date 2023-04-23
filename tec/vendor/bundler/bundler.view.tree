@@ -1,5 +1,11 @@
 $tec_vendor_bundler $mol_page
-	title \OTA Bundler
+	vendor $tec_vendor
+	title \Update packer
 	body /
-		<= bundle $mol_attach
-			attach_new?val <=> upload?val null
+		<= Controllers_card $mol_card
+			title \1. Select controllers for update:
+			status <= Controllers $tec_vendor_controllers
+		<= Bundler_card $mol_card
+			title \2. Pack update to path file:
+			status <= bundle $mol_attach
+				attach_new? <=> upload? null

@@ -1,0 +1,5 @@
+$tec_vendor_controllers $mol_switch
+	value?val <=> controller?val \none
+	options <= controllers *
+		power \power
+		sensor \sensor
