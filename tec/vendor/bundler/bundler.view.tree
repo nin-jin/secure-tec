@@ -3,7 +3,7 @@ $tec_vendor_bundler $mol_page
 	title \Software
 	body /
 		<= Controllers_card $mol_labeler
-			title \Controller
+			title \Service
 			Content <= Controllers $tec_vendor_controllers
 		<= Bundler_card $mol_labeler
 			title \Files

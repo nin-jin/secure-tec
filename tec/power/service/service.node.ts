@@ -2,6 +2,10 @@ namespace $ {
 	// power sensor + power driver
 	export class $tec_power_service extends $tec_controller_service {
 
+		server_type(){
+			return "power_driver"
+		}
+
 		@ $mol_mem
 		receive( reset?: null ) {
 			

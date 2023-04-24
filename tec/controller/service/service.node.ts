@@ -2,10 +2,6 @@ namespace $ {
 
 	export class $tec_controller_service extends $tec_server {
 
-		server_type(){
-			return "power_driver"
-		}
-
 		@ $mol_mem
 		peer() {
 			
