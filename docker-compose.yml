@@ -17,18 +17,6 @@ services:
     networks:
         network:
             ipv4_address: 172.28.1.1
-  power:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.power
-    ports:
-      - "9090:9092"
-    restart: always
-    environment:
-      - PRIVATE_KEY=jWqTkjmwQ4Z-VnsM7PcJBQ8Dlh8h7YL3MsgQ_13nQy0qXfGWTgj_C02_QF1FMRnAf_PxWVi23a0GunNMNz8a-oHTRz1_ZsP2kMjAHZyvaSp33oibfNKB-sc59Hdf4PNV4
-    networks:
-        network:
-            ipv4_address: 172.28.1.4
 
   persister:
     build:
@@ -56,6 +44,18 @@ services:
     networks:
         network:
             ipv4_address: 172.28.1.3
+  power:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.power
+    ports:
+      - "9092:9092"
+    restart: always
+    environment:
+      - PRIVATE_KEY=jWqTkjmwQ4Z-VnsM7PcJBQ8Dlh8h7YL3MsgQ_13nQy0qXfGWTgj_C02_QF1FMRnAf_PxWVi23a0GunNMNz8a-oHTRz1_ZsP2kMjAHZyvaSp33oibfNKB-sc59Hdf4PNV4
+    networks:
+        network:
+            ipv4_address: 172.28.1.4
 
 volumes:
   db:

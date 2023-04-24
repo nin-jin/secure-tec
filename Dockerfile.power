@@ -10,4 +10,6 @@ RUN npm install
 VOLUME ["/usr/app/tec/power/service/start/-/"]
 RUN npm start tec/power/service/start
 
-CMD node ./tec/power/service/start/-/node.js sync=9092 masters=ws://172:28:1:1
+CMD node ./tec/power/service/start/-/node.js \
+	sync=9092 \
+	masters=ws://172:28:1:1:9090
