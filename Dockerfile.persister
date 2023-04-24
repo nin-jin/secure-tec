@@ -1,0 +1,16 @@
+FROM node:18.16.0-alpine
+
+#Install some dependencies
+RUN apk add --update git
+WORKDIR /usr/app
+COPY ./ /usr/app
+RUN npm install
+
+# Build sync server to anonimous volume (for ota updates)
+VOLUME ["/usr/app/tec/server/run/-/"]
+RUN npm start tec/server/run
+
+CMD node ./tec/server/run/-/node.js sync=9091 \
+	masters=ws://172.28.1.1:9090 \
+	db=postgres://docker:password@:5432/sync?sslmode=disable \
+	log=/var/log/sync.log &>> /var/log/sync.log
