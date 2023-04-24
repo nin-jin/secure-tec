@@ -26,6 +26,7 @@ services:
       - "9091:9091"
     depends_on:
        - db
+       - sync
     restart: always
     networks:
         network:
@@ -50,6 +51,8 @@ services:
       dockerfile: ./Dockerfile.power
     ports:
       - "9092:9092"
+    depends_on:
+      - sync
     restart: always
     environment:
       - PRIVATE_KEY=jWqTkjmwQ4Z-VnsM7PcJBQ8Dlh8h7YL3MsgQ_13nQy0qXfGWTgj_C02_QF1FMRnAf_PxWVi23a0GunNMNz8a-oHTRz1_ZsP2kMjAHZyvaSp33oibfNKB-sc59Hdf4PNV4
