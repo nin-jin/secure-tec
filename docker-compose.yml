@@ -8,11 +8,9 @@ services:
     ports:
       - "9080:9080"
   sync:
-  	restart: always
     build:
       context: .
       dockerfile: ./Dockerfile.sync
     ports:
       - "9090:9090"
-    volumes:
-      - ./builds/server:/usr/app/tec/server/-
+    restart: always
