@@ -15,6 +15,12 @@ namespace $.$$ {
 		domain() {
 			return this.yard().world().Fund( $tec_domain ).Item( this.Peer().id )
 		}
+
+		@ $mol_action
+		new_key_copy() {
+			const peer = $mol_wire_sync( $hyoo_crowd_peer ).generate()
+			return peer.key_private_serial
+		}
 		
 	}
 }

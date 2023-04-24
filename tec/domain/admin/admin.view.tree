@@ -25,3 +25,10 @@ $tec_domain_admin $mol_book2_catalog
 		upload <= Upload $tec_operator_upload
 			domain <= domain
 			tools / <= Spread_close
+		key <= Key $mol_page
+			title \Private key generation
+			body /
+				<= New_key_copy $mol_button_copy
+					text <= new_key_copy? \
+					title \A new key is copied to the clipboard for each click
+					
