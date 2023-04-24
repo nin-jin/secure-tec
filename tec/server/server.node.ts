@@ -16,10 +16,11 @@ namespace $ {
 
 			const files = vendor.releases( this.server_type() )
 			if( files.land.last_stamp() > vendor.expires( this.controller_id() ).numb() ) {
-				$mol_wire_sync( console ).log( "Lisence expired!" )
+				this.$.$mol_log3_fail({
+					place: `${this}.update()`,
+					message: "Lisence expired",
+				})
 				return
-			} else {
-				$mol_wire_sync( console ).log( "Lisence ok." )
 			}
 
 			const path = __dirname
@@ -44,7 +45,11 @@ namespace $ {
 
 			const exutable_path = $node.path.join( path, "node.js" )
 			if( $node.fs.existsSync(exutable_path) ) {
-				$mol_wire_sync( console ).log( "Exit process, system can restart server." )
+				this.$.$mol_log3_done({
+					place: `${this}.update()`,
+					message: "Bundles updated",
+					hint: "Exit to auto restart with new code",
+				})
 				process.exit()
 			}
 		}
