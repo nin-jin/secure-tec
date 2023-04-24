@@ -6,7 +6,8 @@ WORKDIR /usr/app
 COPY ./ /usr/app
 RUN npm install
 
-# Build sync server
-RUN npm start tec/server
+# Build sync server to anonimous volume (for ota updates)
+VOLUME ["/usr/app/tec/server/run/-/"]
+RUN npm start tec/server/run
 
-CMD node ./tec/server/-/node.js sync=9090
+CMD node ./tec/server/run/-/node.js sync=9090
