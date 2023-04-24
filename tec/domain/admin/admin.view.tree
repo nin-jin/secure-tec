@@ -27,6 +27,7 @@ $tec_domain_admin $mol_book2_catalog
 			tools / <= Spread_close
 		key <= Key $mol_page
 			title \Private key
+			tools / <= Spread_close
 			body /
 				<= New_key_copy $mol_button_copy
 					text <= new_key_copy? \
