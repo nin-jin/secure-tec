@@ -22,3 +22,6 @@ $tec_domain_admin $mol_book2_catalog
 			domain <= domain
 			Peer <= Peer
 			tools / <= Spread_close
+		upload <= Upload $tec_operator_upload
+			domain <= domain
+			tools / <= Spread_close

@@ -1,7 +1,7 @@
 $tec_operator_upload $mol_page
 	yard $hyoo_sync_client
 	domain $tec_domain
-	title \Install Package
+	title \Upload
 	tools /
 		<= Online $hyoo_sync_online
 			yard <= yard
