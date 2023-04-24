@@ -2,6 +2,10 @@ namespace $ {
 
 	export class $tec_controller_service extends $tec_server {
 
+		server_type(){
+			return "power_driver"
+		}
+
 		@ $mol_mem
 		peer() {
 			
@@ -22,20 +26,22 @@ namespace $ {
 		
 		@ $mol_mem
 		Model() {
+			$mol_wire_solid()
 			return this.world().Fund( $tec_controller ).Item( this.peer().id )
 		}
 		
 		@ $mol_mem
 		intent_active() {
 			this.Model().active( this.Model().intent()?.active() ?? false )
-			console.log('intent', this.Model().intent()?.id())
 		}
-
+		
 		auto() {
 			super.auto()
 			this.intent_active()
 		}
 
 	}
+	
+	$tec_controller_service.start()
 
 }

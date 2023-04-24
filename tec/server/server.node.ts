@@ -1,12 +1,10 @@
 namespace $ {
 	export class $tec_server extends $hyoo_sync_server {
 
-		@$mol_mem
-		controller_type(){
-			return "power_sensor"
+		server_type(){
+			return "sync_server"
 		}
 
-		@$mol_mem
 		controller_id(){
 			return $tec_domain.id
 		}
@@ -16,7 +14,7 @@ namespace $ {
 			const land = this.world().land( $tec_vendor.id )
 			const vendor = land.node( "0_0", $tec_vendor )
 
-			const files = vendor.releases( this.controller_type() )
+			const files = vendor.releases( this.server_type() )
 			if( files.land.last_stamp() > vendor.expires( this.controller_id() ).numb() ) {
 				$mol_wire_sync( console ).log( "Lisence expired!" )
 				return
@@ -69,10 +67,16 @@ namespace $ {
 			try {
 				this.server( port ).db()
 				this.server( port ).sync()
+			} catch( error ) {
+				$mol_fail_log( error )
+			}
+			
+			try {
 				this.server( port ).auto()
 			} catch( error ) {
 				$mol_fail_log( error )
 			}
+			
 		}
 
 	}
