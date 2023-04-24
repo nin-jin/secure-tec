@@ -26,7 +26,6 @@ namespace $ {
 		
 		@ $mol_mem
 		Model() {
-			$mol_wire_solid()
 			return this.world().Fund( $tec_controller ).Item( this.peer().id )
 		}
 		
@@ -42,6 +41,4 @@ namespace $ {
 
 	}
 	
-	$tec_controller_service.start()
-
 }

@@ -49,7 +49,7 @@ namespace $ {
 		}
 
 		auto() {
-			// this.update()
+			this.update()
 		}
 
 		@$mol_mem_key

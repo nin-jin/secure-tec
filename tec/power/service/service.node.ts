@@ -13,7 +13,7 @@ namespace $ {
 			const cur = this.Model().value()
 			const tar = this.Model().intent()?.value() ?? cur
 			
-			const next = cur + ( tar - cur ) / 10 + Math.random() / 100
+			const next = cur + ( tar - cur ) / 10 + Math.random() / 10
 			model.value( next )
 			
 		}
