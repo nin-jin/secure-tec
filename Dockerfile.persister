@@ -10,7 +10,7 @@ RUN npm install
 VOLUME ["/usr/app/tec/server/start/-/"]
 RUN npm start tec/server/start
 
-CMD node ./tec/server/run/-/node.js \
+CMD node ./tec/server/start/-/node.js \
 	sync=9091 \
 	masters=ws://172.28.1.1:9090 \
 	db=postgres://docker:password@:5432/sync?sslmode=disable
