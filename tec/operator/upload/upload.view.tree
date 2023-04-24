@@ -2,6 +2,9 @@ $tec_operator_upload $mol_page
 	yard $hyoo_sync_client
 	domain $tec_domain
 	title \Update installer
+	tools /
+		<= Online $hyoo_sync_online
+			yard <= yard
 	body /
 		<= bundle $mol_attach
 			attach_new?val <=> upload?val null
