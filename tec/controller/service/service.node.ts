@@ -4,19 +4,10 @@ namespace $ {
 
 		@ $mol_mem
 		peer() {
-			
-			let serial = $mol_state_session.value( `${this}.Peer` ) as string | null
+			let serial = $.$mol_env().PRIVATE_KEY ?? $mol_state_arg.value('private_key')
 			if( serial ) return $mol_wire_sync( $hyoo_crowd_peer ).restore( serial )
 			
 			const peer = $mol_wire_sync( $hyoo_crowd_peer ).generate()
-			$mol_state_session.value( `${this}.Peer`, peer.key_private_serial )
-
-			this.$.$mol_log3_rise({
-				place: `${this}.Peer()`,
-				message: 'My ID',
-				id: peer.id,
-			})
-			
 			return peer
 		}
 		
@@ -29,10 +20,20 @@ namespace $ {
 		intent_active() {
 			this.Model().active( this.Model().intent()?.active() ?? false )
 		}
+
+		@ $mol_mem
+		greeting() {
+			this.$.$mol_log3_rise({
+				place: `${this}.Peer()`,
+				message: 'My ID',
+				id: this.peer().id,
+			})
+		}
 		
 		auto() {
 			super.auto()
 			this.intent_active()
+			this.greeting()
 		}
 
 	}
