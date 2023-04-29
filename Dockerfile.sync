@@ -7,7 +7,7 @@ COPY ./ /usr/app
 RUN npm install
 
 # Build sync server to anonimous volume (for ota updates)
-VOLUME ["/usr/app/tec/server/start/-/"]
 RUN npm start tec/server/start
+VOLUME ["/usr/app/tec/server/start/-/"]
 
 CMD node ./tec/server/start/-/node.js sync=9090
