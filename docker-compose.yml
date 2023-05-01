@@ -22,8 +22,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.persister
-    ports:
-      - "9091:9091"
     depends_on:
        - db
        - sync
@@ -49,8 +47,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.power
-    ports:
-      - "9092:9092"
     depends_on:
       - sync
     restart: always
